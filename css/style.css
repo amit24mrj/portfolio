@@ -172,13 +172,6 @@ span {
     box-shadow: none;
 }
 
-.about, .education {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    background: var(--second-bg-color);
-}
 
 .about-img img {
     width: 35vw;
@@ -553,7 +546,7 @@ span {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .timeline::before {
         left: 3rem;
     }
@@ -589,7 +582,86 @@ span {
         font-size: 1.4rem;
     }
 }
+*/
+/* Tablet and Mobile Adjustments */
+@media (max-width: 768px) {
+    .education {
+        padding: 8rem 5% 2rem;
+    }
 
+    .timeline::before {
+        display: none; /* Remove vertical line for mobile */
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        align-items: center; /* Center content */
+        margin-bottom: 3rem;
+        transform: translateX(-50px); /* Start off-screen for animation */
+        animation: slideInLeft 0.5s ease forwards;
+        animation-delay: calc(0.2s * var(--index));
+    }
+
+    @keyframes slideInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .timeline-year {
+        width: 100%;
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .timeline-content {
+        width: 90%; /* Slightly less than full width for better look */
+        margin: 0 auto;
+        text-align: left; /* Keep text left-aligned for readability */
+    }
+
+    .timeline-item::before {
+        top: -3rem; /* Place icon above content */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.8rem;
+    }
+}
+
+/* Small Mobile Adjustments */
+@media (max-width: 450px) {
+    .education {
+        padding: 6rem 3% 2rem;
+    }
+
+    .education .heading {
+        font-size: 3.2rem;
+        margin-bottom: 3rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 2rem;
+    }
+
+    .timeline-content p {
+        font-size: 1.3rem;
+    }
+
+    .timeline-year span {
+        font-size: 2rem;
+    }
+
+    .timeline-item::before {
+        top: -2.5rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.6rem;
+    }
+}
 
 /* Skills Section */
 .skills {
