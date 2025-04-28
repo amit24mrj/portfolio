@@ -496,10 +496,13 @@ span {
 .education {
     background: var(--second-bg-color);
     padding: 10rem 9% 2rem;
+    text-align: center; /* Center heading for all views */
 }
 
-.education h2 {
+.education .heading {
+    font-size: 4rem;
     margin-bottom: 5rem;
+    display: inline-block;
 }
 
 .timeline {
@@ -525,6 +528,17 @@ span {
     align-items: flex-start;
     margin-bottom: 4rem;
     position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: calc(0.2s * var(--index));
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .timeline-year {
@@ -550,6 +564,7 @@ span {
     border-radius: 1rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform, box-shadow;
 }
 
 .timeline-content:hover {
@@ -588,41 +603,83 @@ span {
     z-index: 1;
 }
 
-/* Responsive Adjustments */
+/* Tablet and Mobile Adjustments */
 @media (max-width: 768px) {
-    .timeline::before {
-        left: 3rem;
+    .education {
+        padding: 8rem 5% 2rem;
     }
+
+    .timeline::before {
+        /* display: none; Remove vertical line for mobile */
+    }
+
     .timeline-item {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* Center content */
+        margin-bottom: 3rem;
+        transform: translateX(-50px); /* Start off-screen for animation */
+        animation: slideInLeft 0.5s ease forwards;
+        animation-delay: calc(0.2s * var(--index));
     }
+
+    @keyframes slideInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
     .timeline-year {
         width: 100%;
-        text-align: left;
+        text-align: center;
         padding-right: 0;
-        padding-left: 6rem;
         margin-bottom: 1rem;
     }
+
     .timeline-content {
-        width: 100%;
-        margin-left: 6rem;
+        width: 90%; /* Slightly less than full width for better look */
+        margin: 0 auto;
+        text-align: left; /* Keep text left-aligned for readability */
     }
+
     .timeline-item::before {
-        left: 1.5rem;
-        top: 2rem;
+        top: -3rem; /* Place icon above content */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.8rem;
     }
 }
 
+/* Small Mobile Adjustments */
 @media (max-width: 450px) {
     .education {
-        padding: 8rem 3% 2rem;
+        padding: 6rem 3% 2rem;
     }
+
+    .education .heading {
+        font-size: 3.2rem;
+        margin-bottom: 3rem;
+    }
+
     .timeline-content h3 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
+
     .timeline-content p {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+    }
+
+    .timeline-year span {
+        font-size: 2rem;
+    }
+
+    .timeline-item::before {
+        top: -2.5rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.6rem;
     }
 }
 
