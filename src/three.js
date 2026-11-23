@@ -82,9 +82,9 @@ export function scene(){
   addEventListener("pointermove",mv);addEventListener("resize",size);size();
   (function tick(){raf=requestAnimationFrame(tick);const t=clk.getElapsedTime()*rm;U.t.value=t;const dt=t-lt;lt=t;
     W.forEach(o=>{const x=o.g.position;x.x+=o.v*dt;if(x.x>15)x.x=-15;if(x.x<-15)x.x=15;const w=t*6+o.ph;o.p.legs[0].rotation.x=Math.sin(w)*.7;o.p.legs[1].rotation.x=-Math.sin(w)*.7;o.p.arms[0].rotation.x=-Math.sin(w)*.6;o.p.arms[1].rotation.x=Math.sin(w)*.6;o.p.g.position.y=Math.abs(Math.cos(w))*.04});
-    const wide=innerWidth>820;sy+=(Math.min(scrollY/innerHeight,1)-sy)*.07;
-    G.position.x=wide?2.2*(1-sy):0;G.position.y=wide?0:1.5*(1-sy);
-    G.scale.setScalar((wide?1:.78)*(1-.35*sy));cv.style.opacity=1-.6*sy;
+    const wide=innerWidth>820,small=innerWidth<600;sy+=(Math.min(scrollY/innerHeight,1)-sy)*.07;
+    G.position.x=wide?2.2*(1-sy):0;G.position.y=wide?0:(small?2.75:1.5)*(1-sy);
+    G.scale.setScalar((wide?1:small?.58:.72)*(1-.35*sy));cv.style.opacity=(1-.6*sy)*(wide?1:.55);
     U.m.value+=((Math.hypot(mx,my)<.55?1:0)-U.m.value)*.05;
     orb.rotation.y=t*.15;rings.forEach((o,i)=>{o.sp.rotation.z=t*o.s*2;o.g.rotation.x+=.0015*o.s;o.g.rotation.y+=.001*(i+1)});
     pts.rotation.y=t*.03+mx*.12;pts.rotation.x=my*.08;
